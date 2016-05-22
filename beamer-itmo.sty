@@ -2,10 +2,8 @@
 % by Plotnikov Anton
 
 %%% Loading packages useful for typesetting our slides
-\usepackage{wrapfig}
 \usepackage{xcolor}
 \usepackage{etoolbox}
-\usepackage{hyperref}
 
 \ProvidesPackage{beamer-itmo}[2016/05/22]
 
@@ -19,18 +17,8 @@
 \definecolor{ITMOgreen}{cmyk}{0.45,0,1,0}
 \definecolor{ITMOred}{cmyk}{0,1,0.7,0}
 \definecolor{ITMOorange}{cmyk}{0,0.59,1,0}
-\setbeamercolor{WhiteOnBlue}{bg=ITMOblue,fg=white} % White on Pantone 286
-\setbeamercolor{BlueOnWhite}{fg=ITMOblue,bg=white} % Pantone 286 on White
-
-\usepackage{hyperref}
-\hypersetup{
-    unicode=true,          % non-Latin characters in Acrobat’s bookmarks
-    colorlinks=true,       % false: boxed links; true: colored links
-    linkcolor=white,       % color of internal links (change box color with linkbordercolor)
-    citecolor=ITMOblue,     % color of links to bibliography
-    filecolor=ITMOblue,     % color of file links
-    urlcolor=ITMOblue       % color of external links
-}
+\setbeamercolor{WhiteOnBlue}{bg=ITMOblue,fg=white}
+\setbeamercolor{BlueOnWhite}{fg=ITMOblue,bg=white}
 
 %%% Set color of different objects (see Beamer User Guide for more info)
 \usecolortheme[named=ITMOblue]{structure}
@@ -54,6 +42,16 @@
 \setbeamercolor{palette secondary}{fg=white}
 \setbeamercolor{palette tertiary}{bg=ITMOblue}
 \setbeamercolor{palette tertiary}{fg=white}
+
+%%% Blocks
+\setbeamertemplate{blocks}[rounded=true][shadow=true]
+\setbeamercolor{block title}{fg=white,bg=ITMOblue}
+\setbeamercolor{block body}{bg=ITMOblue!10}
+\setbeamercolor{block title example}{fg=white,bg=ITMOgreen}
+\setbeamercolor{block body example}{bg=ITMOgreen!10}
+\setbeamercolor{block title alerted}{fg=white,bg=ITMOred}
+\setbeamercolor{block body alerted}{bg=ITMOred!10}
+
 
 %%% Layout issues
 \setbeamertemplate{headline}[default]{} % Empty headline
@@ -91,6 +89,7 @@
 
 \addtobeamertemplate{title page}{%
   \setbeamercolor{background canvas}{bg=ITMOblue}
+  \leavevmode%
   \vspace{-.23cm}
   \hbox{%
     \begin{beamercolorbox}[wd=\paperwidth,ht=0.4\paperheight]{frametitle}
