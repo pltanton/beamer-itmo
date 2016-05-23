@@ -20,6 +20,16 @@
 \setbeamercolor{WhiteOnBlue}{bg=ITMOblue,fg=white}
 \setbeamercolor{BlueOnWhite}{fg=ITMOblue,bg=white}
 
+\usepackage{hyperref}
+\hypersetup{%
+    unicode=true,          % non-Latin characters in Acrobat’s bookmarks
+    colorlinks=true,       % false: boxed links; true: colored links
+    linkcolor=white,       % color of internal links (change box color with linkbordercolor)
+    citecolor=ITMOblue,     % color of links to bibliography
+    filecolor=ITMOblue,     % color of file links
+    urlcolor=ITMOblue       % color of external links
+}
+
 %%% Set color of different objects (see Beamer User Guide for more info)
 \usecolortheme[named=ITMOblue]{structure}
 \setbeamercolor{background canvas}{bg=white}
@@ -31,7 +41,7 @@
 \setbeamercolor{itemize subitem}{fg=ITMOblue}
 \setbeamercolor{itemize subsubitem}{fg=ITMOblue}
 \setbeamercolor{block title example}{fg=ITMOgreen}
-\AtBeginEnvironment{exampleblock}{
+\AtBeginEnvironment{exampleblock}{%
     \setbeamercolor{itemize item}{fg=ITMOgreen}
     \setbeamercolor{itemize subitem}{fg=ITMOgreen}
     \setbeamercolor{itemize subsubitem}{fg=ITMOgreen}
@@ -44,7 +54,7 @@
 \setbeamercolor{palette tertiary}{fg=white}
 
 %%% Blocks
-\setbeamertemplate{blocks}[rounded][shadow=false]
+%\setbeamertemplate{blocks}[rounded][shadow=false]
 \setbeamercolor{block title}{fg=white,bg=ITMOblue}
 \setbeamercolor{block body}{bg=ITMOblue!10}
 \setbeamercolor{block title example}{fg=white,bg=ITMOgreen}
@@ -52,11 +62,13 @@
 \setbeamercolor{block title alerted}{fg=white,bg=ITMOred}
 \setbeamercolor{block body alerted}{bg=ITMOred!10}
 
+\setbeamerfont{block title}{size=\small}
+
 
 %%% Layout issues
 \setbeamertemplate{headline}[default]{} % Empty headline
 \setbeamertemplate{frametitle} % Frametitle with logo
-{
+{%
     \nointerlineskip
     \begin{beamercolorbox}[sep=0.2cm,wd=\paperwidth]{frametitle}
 		\begin{wrapfigure}{r}{0.45\textwidth}
@@ -70,7 +82,7 @@
 
 \makeatletter
 \setbeamertemplate{footline} % Footline
-{
+{%
   \leavevmode%
   \hbox{%
   \begin{beamercolorbox}[wd=.2\paperwidth,ht=2ex,dp=1ex,center]{WhiteOnBlue}%
