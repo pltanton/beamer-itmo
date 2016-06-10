@@ -1,25 +1,13 @@
 % ITMO Beamer Theme
-% by Plotnikov Anton
+% Author: Plotnikov Anton
+% 2016
 
-%%% Loading packages useful for typesetting our slides
+% Dependencees
 \usepackage{xcolor}
+\usepackage{tikz}
+\usepackage{calc}
 \usepackage{etoolbox}
-
-\ProvidesPackage{beamer-itmo}[2016/05/22]
-
-\usefonttheme{default} % Font theme
-
-\setbeamertemplate{navigation symbols}{}    % Comment out to show nav. bar
-\setbeamertemplate{itemize items}[circle]   % Style of bullet points
-%\setbeamertemplate{theorems}[numbered]     % Number objects such as theorems and definitions
-
-\definecolor{ITMOblue}{cmyk}{0.94,0.78,0,0}
-\definecolor{ITMOgreen}{cmyk}{0.45,0,1,0}
-\definecolor{ITMOred}{cmyk}{0,1,0.7,0}
-\definecolor{ITMOorange}{cmyk}{0,0.59,1,0}
-\setbeamercolor{WhiteOnBlue}{bg=ITMOblue,fg=white}
-\setbeamercolor{BlueOnWhite}{fg=ITMOblue,bg=white}
-
+\usepackage{wrapfig}
 \usepackage{hyperref}
 \hypersetup{%
     unicode=true,          % non-Latin characters in Acrobat’s bookmarks
@@ -30,7 +18,32 @@
     urlcolor=ITMOblue       % color of external links
 }
 
-%%% Set color of different objects (see Beamer User Guide for more info)
+% Define and set fonts
+\usepackage{fontspec}
+\setsansfont[
+    BoldFont={ALSSchlangesans-Bold},
+    ItalicFont={ALSSchlangesans-Light}
+]{ALSSchlangesans}
+\usefonttheme[onlymath]{serif}
+
+% Some simple beamer configuration
+\setbeamertemplate{navigation symbols}{} % Disable navigation
+\setbeamertemplate{itemize items}[circle]   % Style of bullet points
+%\setbeamertemplate{theorems}[numbered]     % Number objects such as theorems and definitions
+
+% Define colors
+\definecolor{ITMOblue}{cmyk}{0.94,0.78,0,0}
+\definecolor{ITMOgreen}{cmyk}{0.45,0,1,0}
+\definecolor{ITMOred}{cmyk}{0,1,0.7,0}
+\definecolor{ITMOorange}{cmyk}{0,0.59,1,0}
+\setbeamercolor{WhiteOnBlue}{bg=ITMOblue,fg=white}
+\setbeamercolor{BlueOnWhite}{fg=ITMOblue,bg=white}
+
+% Define images
+\newcommand{\logoHor}{./beamer-itmo/itmo_logo_rus_goriz_blue.eps}
+\newcommand{\logoVert}{./beamer-itmo/itmo_logo_rus_vert_blue.eps}
+
+% Set colors
 \usecolortheme[named=ITMOblue]{structure}
 \setbeamercolor{background canvas}{bg=white}
 \setbeamercolor{frametitle}{bg=ITMOblue}
@@ -53,8 +66,58 @@
 \setbeamercolor{palette tertiary}{bg=ITMOblue}
 \setbeamercolor{palette tertiary}{fg=white}
 
-%%% Blocks
-%\setbeamertemplate{blocks}[rounded][shadow=false]
+% Custop bulletpoints in items and subitems
+\setbeamertemplate{itemize item}{%
+	\tikz{%
+		\draw[fill=ITMOblue,draw=none] (0, 0) rectangle(0.08, 0.08);
+		\draw[fill=ITMOblue,draw=none] (0.08, 0.08) rectangle(0.16, 0.16);
+		\draw[fill=ITMOblue,draw=none] (0, 0.16) rectangle(0.08, 0.24);
+	}
+}
+\setbeamertemplate{itemize subitem}{%
+	\tikz{%
+		\draw[fill=ITMOblue,draw=none] (0, 0) rectangle(0.075, 0.075);
+		\draw[fill=ITMOblue,draw=none] (0.075, 0.075) rectangle(0.15, 0.15);
+		\draw[fill=ITMOblue,draw=none] (0, 0.15) rectangle(0.075, 0.225);
+	}
+}
+
+% Custom title page
+\newcommand{\ITMOtitlepage}{%
+    \begingroup
+    \setbeamercolor{background canvas}{bg=ITMOblue}
+    \setbeamertemplate{footline}{}
+    \color{white}
+    \begin{frame}[noframenumbering]
+        \begin{center}
+            \begin{figure}
+                \includegraphics[height=0.3\paperheight]{\logoVert}
+            \end{figure}
+            \large\textbf{\inserttitle}
+            \\
+            \insertsubtitle
+            \vfill
+            \tiny\insertinstitute
+            \\
+            \small\textbf{\insertauthor}
+            \vfill
+            \tiny\insertdate
+        \end{center}
+    \end{frame}
+    \endgroup
+}
+
+
+% Append logotype to title
+\addtobeamertemplate{frametitle}{}{%
+    \begin{tikzpicture}[remember picture,overlay]
+        \node[anchor=north east,yshift=0pt] at (current page.north
+            east){\includegraphics[height=17pt]{\logoHor}};
+    \end{tikzpicture}
+}
+
+
+% Blocks
 \setbeamertemplate{blocks}[rounded][shadow=false]
 \setbeamercolor{block title}{fg=white,bg=ITMOblue}
 \setbeamercolor{block body}{bg=ITMOblue!10}
@@ -65,50 +128,19 @@
 
 \setbeamerfont{block title}{series=\bfseries,size=\footnotesize}
 
-
-%%% Layout issues
-\setbeamertemplate{headline}[default]{} % Empty headline
-\setbeamertemplate{frametitle} % Frametitle with logo
+% Footline
+\setbeamertemplate{footline}
 {%
-    \nointerlineskip
-    \begin{beamercolorbox}[sep=0.2cm,wd=\paperwidth]{frametitle}
-		\begin{wrapfigure}{r}{0.45\textwidth}
-            \vskip-3ex\includegraphics[height=40pt]{beamer-itmo/itmo_logo_rus_goriz_blue}
- 		\end{wrapfigure}
- 		\strut\insertframetitle
-
- 		\small\strut\insertframesubtitle
-    \end{beamercolorbox}
+    \leavevmode%
+    \hbox{%
+        \begin{beamercolorbox}[wd=.2\paperwidth,ht=2.3ex,dp=1ex,center]{WhiteOnBlue}%
+            \usebeamerfont{author in head/foot}\textbf{\insertshortauthor}
+        \end{beamercolorbox}%
+        \begin{beamercolorbox}[wd=.5\paperwidth,ht=2.3ex,dp=1ex,center]{WhiteOnBlue}%
+            \usebeamerfont{title in head/foot}\textbf{\insertshorttitle}
+        \end{beamercolorbox}%
+        \begin{beamercolorbox}[wd=.3\paperwidth,ht=2.3ex,dp=1ex,right]{WhiteOnBlue}%
+            \usebeamerfont{date in head/foot}\textbf{\insertshortdate{}}\hspace*{2em}
+            \textbf{\insertframenumber{}} / {\inserttotalframenumber}\hspace*{2ex}
+    \end{beamercolorbox}}%
 }
-
-\makeatletter
-\setbeamertemplate{footline} % Footline
-{%
-  \leavevmode%
-  \hbox{%
-  \begin{beamercolorbox}[wd=.2\paperwidth,ht=2ex,dp=1ex,center]{WhiteOnBlue}%
-    \usebeamerfont{author in head/foot}\insertshortauthor
-  \end{beamercolorbox}%
-  \begin{beamercolorbox}[wd=.4\paperwidth,ht=2ex,dp=1ex,center]{WhiteOnBlue}%
-    \usebeamerfont{title in head/foot}\insertshorttitle
-  \end{beamercolorbox}%
-  \begin{beamercolorbox}[wd=.4\paperwidth,ht=2ex,dp=1ex,right]{WhiteOnBlue}%
-    \usebeamerfont{date in head/foot}\insertshortdate{}\hspace*{2em}
-    \insertframenumber{} / \inserttotalframenumber\hspace*{2ex}
-  \end{beamercolorbox}}%
-  \vskip0pt%
-}
-\makeatother
-
-\addtobeamertemplate{title page}{%
-  \setbeamercolor{background canvas}{bg=ITMOblue}
-  \leavevmode%
-  \vspace{-.23cm}
-  \hbox{%
-    \begin{beamercolorbox}[wd=\paperwidth,ht=0.4\paperheight]{frametitle}
-      \begin{center}
-        \includegraphics[height=0.38\paperheight]{beamer-itmo/itmo_logo_rus_vert_blue}
-        \vspace{-0.025\paperheight}
-      \end{center}
-   \end{beamercolorbox}}
-}{\vspace{3cm}}
