@@ -31,6 +31,10 @@
 \setbeamertemplate{itemize items}[circle]   % Style of bullet points
 %\setbeamertemplate{theorems}[numbered]     % Number objects such as theorems and definitions
 
+% Deal with margins
+\setbeamersize{text margin left=1.8em,
+               text margin right=1.8em}
+
 % Define colors
 \definecolor{ITMOblue}{cmyk}{0.94,0.78,0,0}
 \definecolor{ITMOgreen}{cmyk}{0.45,0,1,0}
@@ -38,6 +42,7 @@
 \definecolor{ITMOorange}{cmyk}{0,0.59,1,0}
 \setbeamercolor{WhiteOnBlue}{bg=ITMOblue,fg=white}
 \setbeamercolor{BlueOnWhite}{fg=ITMOblue,bg=white}
+\colorlet{separation rule}{ITMOblue!40}
 
 % Define images
 \newcommand{\logoHor}{./beamer-itmo/itmo_logo_rus_goriz_blue.eps}
@@ -82,27 +87,61 @@
 	}
 }
 
+
+\newcommand{\ITMOthankspage}{%
+    \begingroup
+    \setbeamercolor{background canvas}{bg=ITMOblue}
+    \setbeamertemplate{footline}{}
+    \begin{frame}[c,noframenumbering]
+        \color{white}
+        \minipage[c][0.9\textheight]{\columnwidth}
+            \begin{center}
+                \begin{figure}
+                    \includegraphics[height=0.3\paperheight]{\logoVert}
+                \end{figure}
+
+                \vfill
+
+                \Huge\textbf{Спасибо за внимание!}
+
+                \vfill
+
+                \normalsize\textbf{\insertshortauthor}
+                \\
+                \vspace{1em}
+                \footnotesize\insertdate
+            \end{center}
+        \endminipage
+    \end{frame}
+    \endgroup
+}
+
+
 % Custom title page
 \newcommand{\ITMOtitlepage}{%
     \begingroup
     \setbeamercolor{background canvas}{bg=ITMOblue}
     \setbeamertemplate{footline}{}
     \color{white}
-    \begin{frame}[noframenumbering]
+    \begin{frame}[c,noframenumbering]
+        \minipage[c][0.9\textheight]{\columnwidth}
         \begin{center}
             \begin{figure}
-                \includegraphics[height=0.3\paperheight]{\logoVert}
+                \includegraphics[height=0.35\paperheight]{\logoVert}
             \end{figure}
             \large\textbf{\inserttitle}
             \\
             \insertsubtitle
+
             \vfill
+
             \tiny\insertinstitute
             \\
             \small\textbf{\insertauthor}
             \vfill
             \tiny\insertdate
         \end{center}
+        \endminipage
     \end{frame}
     \endgroup
 }
@@ -114,6 +153,7 @@
         \node[anchor=north east,yshift=0pt] at (current page.north
             east){\includegraphics[height=17pt]{\logoHor}};
     \end{tikzpicture}
+    \vspace{-1.2em}
 }
 
 
@@ -127,6 +167,11 @@
 \setbeamercolor{block body alerted}{bg=ITMOred!10}
 
 \setbeamerfont{block title}{series=\bfseries,size=\footnotesize}
+
+\makeatletter
+\pgfdeclareverticalshading[lower.bg,upper.bg]{bmb@transition}{200cm}{%
+  color(0pt)=(separation rule); color(2pt)=(separation rule); color(3pt)=(separation rule)}
+\makeatother
 
 % Footline
 \setbeamertemplate{footline}
