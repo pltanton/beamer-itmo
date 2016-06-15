@@ -42,7 +42,6 @@
 \definecolor{ITMOorange}{cmyk}{0,0.59,1,0}
 \setbeamercolor{WhiteOnBlue}{bg=ITMOblue,fg=white}
 \setbeamercolor{BlueOnWhite}{fg=ITMOblue,bg=white}
-\colorlet{separation rule}{ITMOblue!40}
 
 % Define images
 \newcommand{\logoHor}{./beamer-itmo/itmo_logo_rus_goriz_blue.eps}
@@ -170,7 +169,7 @@
 
 \makeatletter
 \pgfdeclareverticalshading[lower.bg,upper.bg]{bmb@transition}{200cm}{%
-  color(0pt)=(separation rule); color(2pt)=(separation rule); color(3pt)=(separation rule)}
+  color(0pt)=(upper.bg!40); color(2pt)=(upper.bg!40); color(3pt)=(upper.bg!40)}
 \makeatother
 
 % Footline
